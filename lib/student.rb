@@ -43,7 +43,7 @@ attr_reader :id
     end
   end
   
-  def self.create
+  def self.create(name, grade)
     students = Song.new(name, grade)
     students.save
     students
