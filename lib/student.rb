@@ -7,7 +7,7 @@ class Student
 attr_accessor :name, :grade
 attr_reader :id
 
-  def initialize(name, grade, id = nil)
+  def initialize(name, grade, id =)
     @name = name
     @grade = grade
     @id = id
@@ -36,17 +36,17 @@ attr_reader :id
     else sql = <<-SQL
       INSERT INTO students (name, grade) 
       VALUES (?, ?)
-    SQL
+      SQL
 
       DB[:conn].execute(sql, self.name, self.grade)
       @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
     end
   end
   
-  def self.create(name, grade)
-    song = Student.new(name, grade)
-    song.save
-    song
+  def self.create
+    students = Song.new(name, grade)
+    students.save
+    students
   end
   
   def self.new_from_db(row)
